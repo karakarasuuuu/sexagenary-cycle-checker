@@ -9,7 +9,7 @@ def suffix(i: int) -> str:
     if t == 1: return 'st'
     elif t == 2: return 'nd'
     elif t == 3: return 'rd'
-    else: return 'nd'
+    else: return 'th'
 
 if __name__ == '__main__':
 
