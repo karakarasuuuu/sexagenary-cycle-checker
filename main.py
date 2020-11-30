@@ -29,9 +29,13 @@ if __name__ == '__main__':
 
         done = False
 
-        for i in range(h, 60, 10):
+        # It is 61 instead of 60 because 60 is valid as well
+        for i in range(h, 61, 10):
+            
+            # Use 12 to replace 0
+            t = i % 12 if i % 12 != 0 else 12
 
-            if i % 12 == e: 
+            if t == e: 
 
                 print('Valid!')
                 print('It is the ' + str(i) + suffix(i) + ' year!')
