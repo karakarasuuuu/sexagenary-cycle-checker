@@ -11,36 +11,45 @@ def suffix(i: int) -> str:
     elif t == 3: return 'rd'
     else: return 'th'
 
-if __name__ == '__main__':
+def validate(s: str) -> (bool, int):
 
-    string = input('Please enter your question: ').strip()
-    
-    if len(string) != 2: print('Invalid input!')
-    
-    else:
+    try:
 
-        try:
+        # + 1 part is to adjust the index
+        h = heavenly.index(s[0]) + 1
+        e = earthly.index(s[1]) + 1
 
-            # + 1 part is to adjust the index 
-            h = heavenly.index(string[0]) + 1
-            e = earthly.index(string[1]) + 1
+    except ValueError: return False, -1
+
+    # It is 61 instead of 60 because 60 is valid as well
+    for i in range(h, 61, 10):
         
-        except ValueError: print('Invalid input!')
+        # Use 12 to replace 0
+        t = i % 12 if i % 12 != 0 else 12
 
-        done = False
+        if t == e: return True, i
 
-        # It is 61 instead of 60 because 60 is valid as well
-        for i in range(h, 61, 10):
-            
-            # Use 12 to replace 0
-            t = i % 12 if i % 12 != 0 else 12
+    return False, -1
 
-            if t == e: 
 
-                print('Valid!')
-                print('It is the ' + str(i) + suffix(i) + ' year!')
-                done = True
-                
-                break
+if __name__ == '__main__':
+    
+    # testcase = []
+    # for h in heavenly:
+    #     for e in earthly:
+    #         testcase.append(h + e)
 
-        if not done: print('It is not a valid year!')
+    s = input('Please enter your question: ').strip()
+    
+    if len(s) != 2: print('Invalid input!')
+    
+    else: 
+
+        result, index = validate(s)
+
+        if result:
+
+            print('Valid!')
+            print('It is the ' + str(index) + suffix(index) + ' year!')
+
+        else: print('It is not a valid year!')
